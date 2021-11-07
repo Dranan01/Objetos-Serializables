@@ -13,22 +13,38 @@ import java.io.Serializable;
  */
 public class Banco implements Serializable{
     
-    private int nBanco;
+   private int nBanco;
    private String direccion;
    private String registros;
    private String jefeBanco;
    private boolean activo;
+   private static int contador = 0;
    
    
-    private static int contador;
     public Banco(String direccion, String registros, String jefeBanco) {
         this.nBanco = contador;
         this.direccion = direccion;
         this.registros = registros;
         this.jefeBanco = jefeBanco;
         this.activo = true;
-        contador++;
+        incrementarContador();
         
+    }
+    
+    
+
+    public static void setContador(int contador) {
+        Banco.contador = contador;
+    }
+    
+    
+    
+    private void incrementarContador(){
+        contador++;
+    }
+    
+    public int getnContador(){
+        return contador;
     }
 
     public int getnBanco() {

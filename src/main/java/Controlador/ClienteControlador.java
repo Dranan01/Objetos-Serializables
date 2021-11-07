@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import modelo.Banco;
 import modelo.Cliente;
 import modelo.Sucursal;
 
@@ -46,9 +47,9 @@ public class ClienteControlador {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public void EscribirCliente() throws FileNotFoundException, IOException {
+    public void EscribirBanco(ArrayList<Cliente> clientes) throws FileNotFoundException, IOException {
         f = new File("Cliente.dat");
-        fOut = new FileOutputStream(f, true);
+        fOut = new FileOutputStream(f);
         dataOS = new ObjectOutputStream(fOut);
         it = clientes.iterator();
         while (it.hasNext()) {
@@ -58,6 +59,7 @@ public class ClienteControlador {
         dataOS.close();
 
     }
+    
 
     /**
      *

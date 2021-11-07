@@ -20,6 +20,7 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,11 +76,14 @@ BancoControlador bc = new BancoControlador();
         String matriz[][] = new String[bancos.size()][3];
     
         for (int i = 0; i < bancos.size(); i++) {
+            if (bancos.get(i).isActivo() == true) {
+                
             
             matriz[i][0] = bancos.get(i).getDireccion();
             matriz[i][1] = bancos.get(i).getJefeBanco();
             matriz[i][2] = bancos.get(i).getRegistros();
-        }
+            
+        
         
     jTable_Banco.setModel(new javax.swing.table.DefaultTableModel(
             matriz,
@@ -89,7 +93,8 @@ BancoControlador bc = new BancoControlador();
                     ));
    
      }
-
+        }
+}
 
     public void añadirATabla(){
         String[] array = new String[3];
@@ -101,10 +106,57 @@ BancoControlador bc = new BancoControlador();
         DefaultTableModel dt = (DefaultTableModel) jTable_Banco.getModel();
         dt.addRow(array);
     }
+    
+    
+    public int getID(){
+        int id = 0;
+        Banco b;
+        int fila;
+        fila = jTable_Banco.getSelectedRow();
+        String registros = jTable_Banco.getValueAt(fila,2).toString();
+        String jefe_Banco = jTable_Banco.getValueAt(fila,1).toString();
+        Iterator it = bancos.iterator();
+        while(it.hasNext()) {
+            b = (Banco) it.next();
+            String registrosb = b.getRegistros();
+            String jefeBancob = b.getJefeBanco();
+            
+            
+            if (registros.equals(registrosb) && jefe_Banco.equals(jefeBancob)) {
+                id = b.getnBanco();
+            }
+            
+    }
+        return id;
+    }
+    
+    public void habilitarBotonesBanco(){
+        jButton_aniadir_banco.setEnabled(true);
+        jButton_borrar_banco.setEnabled(true);
+        jButton_guardar_banco.setEnabled(true);
+        jButton_modificar_banco.setEnabled(true);
+    }
 
+    
+    public void deshabilitarBotonesBanco(){
+        jButton_aniadir_banco.setEnabled(false);
+        jButton_borrar_banco.setEnabled(false);
+        jButton_guardar_banco.setEnabled(false);
+        jButton_modificar_banco.setEnabled(false);
+    }
+    
+    
 
     /**
      * Creates new form Ventana1
+     */
+    /**
+     * 
+     * @throws IOException
+     * @throws FileNotFoundException
+     * @throws ClassNotFoundException
+     * @throws NotSerializableException
+     * @throws SAXException 
      */
     public NewJFrame() throws IOException, FileNotFoundException, ClassNotFoundException, NotSerializableException, SAXException {
         initComponents();
@@ -191,6 +243,7 @@ BancoControlador bc = new BancoControlador();
         jLabel_num_habitantes2 = new javax.swing.JLabel();
         jRadioButton2 = new javax.swing.JRadioButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jPanel_Cliente = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_cliente = new javax.swing.JTable();
@@ -210,6 +263,7 @@ BancoControlador bc = new BancoControlador();
         jTextField_anio_publicacion = new javax.swing.JTextField();
         jRadioButton4 = new javax.swing.JRadioButton();
         jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
         jPanel_prestamo = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable_prestamo = new javax.swing.JTable();
@@ -229,6 +283,7 @@ BancoControlador bc = new BancoControlador();
         jLabel_ciudad_natal1 = new javax.swing.JLabel();
         jRadioButton5 = new javax.swing.JRadioButton();
         jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -236,7 +291,8 @@ BancoControlador bc = new BancoControlador();
                 formWindowActivated(evt);
             }
             public void windowClosing(java.awt.event.WindowEvent evt) {
-              }
+                formWindowClosing(evt);
+            }
         });
 
         jTable_Banco.setModel(new javax.swing.table.DefaultTableModel(
@@ -265,6 +321,27 @@ BancoControlador bc = new BancoControlador();
         jLabel_telefono.setText("Dirección:");
 
         jLabel_direccion.setText("Jefe Banco:");
+
+        jTextField_direccion_banco.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField_direccion_bancoFocusLost(evt);
+            }
+        });
+        jTextField_direccion_banco.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jTextField_direccion_bancoMouseExited(evt);
+            }
+        });
+        jTextField_direccion_banco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_direccion_bancoActionPerformed(evt);
+            }
+        });
+        jTextField_direccion_banco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_direccion_bancoKeyPressed(evt);
+            }
+        });
 
         jButton_guardar_banco.setText("Guardar");
         jButton_guardar_banco.addActionListener(new java.awt.event.ActionListener() {
@@ -450,6 +527,8 @@ BancoControlador bc = new BancoControlador();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel1.setText("Banco:");
+
         javax.swing.GroupLayout jPanel_SucursalLayout = new javax.swing.GroupLayout(jPanel_Sucursal);
         jPanel_Sucursal.setLayout(jPanel_SucursalLayout);
         jPanel_SucursalLayout.setHorizontalGroup(
@@ -479,7 +558,9 @@ BancoControlador bc = new BancoControlador();
                                     .addComponent(jButton_cancelar_sucursa, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
                             .addGroup(jPanel_SucursalLayout.createSequentialGroup()
                                 .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(182, 182, 182)
+                                .addGap(138, 138, 138)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel_SucursalLayout.createSequentialGroup()
                         .addContainerGap()
@@ -531,7 +612,8 @@ BancoControlador bc = new BancoControlador();
                 .addGroup(jPanel_SucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_num_habitantes2)
                     .addComponent(jRadioButton2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
@@ -619,6 +701,8 @@ BancoControlador bc = new BancoControlador();
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel2.setText("Sucursal");
+
         javax.swing.GroupLayout jPanel_ClienteLayout = new javax.swing.GroupLayout(jPanel_Cliente);
         jPanel_Cliente.setLayout(jPanel_ClienteLayout);
         jPanel_ClienteLayout.setHorizontalGroup(
@@ -655,7 +739,9 @@ BancoControlador bc = new BancoControlador();
                                     .addComponent(jButton_cancelar_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
                             .addGroup(jPanel_ClienteLayout.createSequentialGroup()
                                 .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(188, 188, 188)
+                                .addGap(136, 136, 136)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -695,7 +781,8 @@ BancoControlador bc = new BancoControlador();
                 .addGroup(jPanel_ClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_biblioteca_libro)
                     .addComponent(jRadioButton4)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addContainerGap(74, Short.MAX_VALUE))
         );
 
@@ -793,6 +880,8 @@ BancoControlador bc = new BancoControlador();
             }
         });
 
+        jLabel3.setText("Cliente");
+
         javax.swing.GroupLayout jPanel_prestamoLayout = new javax.swing.GroupLayout(jPanel_prestamo);
         jPanel_prestamo.setLayout(jPanel_prestamoLayout);
         jPanel_prestamoLayout.setHorizontalGroup(
@@ -819,7 +908,9 @@ BancoControlador bc = new BancoControlador();
                         .addGroup(jPanel_prestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel_prestamoLayout.createSequentialGroup()
                                 .addComponent(jRadioButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
                                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField_nombre_persona, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                             .addComponent(jTextField_DNI)
@@ -867,7 +958,8 @@ BancoControlador bc = new BancoControlador();
                 .addGroup(jPanel_prestamoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_ciudad_natal1)
                     .addComponent(jRadioButton5)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
@@ -911,12 +1003,30 @@ BancoControlador bc = new BancoControlador();
     try {
        bancos = bc.leerBanco(); 
         cargarTabla();
+        
+        
     } catch (IOException ex) {
         Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
     } catch (ClassNotFoundException ex) {
         Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
     }
     }//GEN-LAST:event_formWindowActivated
+
+    private void jTextField_direccion_bancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_direccion_bancoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_direccion_bancoActionPerformed
+
+    private void jTextField_direccion_bancoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_direccion_bancoKeyPressed
+  
+    }//GEN-LAST:event_jTextField_direccion_bancoKeyPressed
+
+    private void jTextField_direccion_bancoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_direccion_bancoFocusLost
+       
+    }//GEN-LAST:event_jTextField_direccion_bancoFocusLost
+
+    private void jTextField_direccion_bancoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_direccion_bancoMouseExited
+
+    }//GEN-LAST:event_jTextField_direccion_bancoMouseExited
 
     /**
      * 
@@ -933,6 +1043,10 @@ BancoControlador bc = new BancoControlador();
         jTextField_jefeBanco.setText(jefe_Banco);
     
     }
+    
+    
+    
+    
     private void jTable_clienteMouseClicked(java.awt.event.MouseEvent evt){}
     private void jTable_prestamoMouseClicked(java.awt.event.MouseEvent evt){}
     private void jTable_SucursalMouseClicked(java.awt.event.MouseEvent evt){}
@@ -944,13 +1058,16 @@ BancoControlador bc = new BancoControlador();
      * @param evt 
      */
     private void jButton_guardar_bancoActionPerformed(java.awt.event.ActionEvent evt){
+        if (!jTextField_jefeBanco.getText().equals("") || !jTextField_registros.getText().equals("") || !jTextField_direccion_banco.getText().equals("") ) {
+            
+        
     Banco b;
     String direccion = jTextField_direccion_banco.getText();
     String registros = jTextField_registros.getText();
     String jefeBanco = jTextField_jefeBanco.getText();
+    Banco.setContador(bancos.size());
     b = new Banco(direccion,registros ,jefeBanco );
     bancos.add(b);
-    limpiarTextoBanco();
     
     try {
         bc.EscribirBanco(bancos);
@@ -959,7 +1076,10 @@ BancoControlador bc = new BancoControlador();
     }
     
     }
-    
+        else{
+            JOptionPane.showMessageDialog(null,"Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     
     private void jButton_cancelar_bancoActionPerformed(java.awt.event.ActionEvent evt){
         limpiarTextoBanco();
@@ -967,7 +1087,13 @@ BancoControlador bc = new BancoControlador();
     
     
     private void jButton_aniadir_bancoActionPerformed(java.awt.event.ActionEvent evt){
+     if (!jTextField_jefeBanco.getText().equals("") || !jTextField_registros.getText().equals("") || !jTextField_direccion_banco.getText().equals("") ) {
     añadirATabla();
+    limpiarTextoBanco();
+     }
+     else{
+        JOptionPane.showMessageDialog(null,"Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+     }
     }
     
     
@@ -977,25 +1103,15 @@ BancoControlador bc = new BancoControlador();
      * @param evt 
      */
     private void  jButton_modificar_bancoActionPerformed(java.awt.event.ActionEvent evt) {
-        int fila;
-        int id = 0;
+        if (!jTextField_jefeBanco.getText().equals("") || !jTextField_registros.getText().equals("") || !jTextField_direccion_banco.getText().equals("") ) {
+        int id = getID();
         Banco b;
     try {
-        bancos = bc.leerBanco();
     
       
-        fila = jTable_Banco.getSelectedRow();
-        String registros = (String) jTable_Banco.getValueAt(fila,1);
-        String jefe_Banco = (String) jTable_Banco.getValueAt(fila,2);
-        Iterator it = bancos.iterator();
-        while(it.hasNext()) {
-            b = (Banco) it.next();
-            if (b.getRegistros().equals(registros) && b.getJefeBanco().equals(jefe_Banco)) {
-                id = b.getnBanco();
-            }
-        }
-        Iterator it2 = bancos.iterator();
-        while(it2.hasNext()){
+        Iterator it;
+        it = bancos.iterator();
+        while(it.hasNext()){
             b = (Banco) it.next();
             if (b.getnBanco() == id) {
                 b.setJefeBanco(jTextField_jefeBanco.getText());
@@ -1003,14 +1119,24 @@ BancoControlador bc = new BancoControlador();
                 b.setDireccion(jTextField_direccion_banco.getText());
             }
            }
+        
+        
         bc.EscribirBanco(bancos);
         cargarTabla();
        } catch (IOException ex) {
         Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
     }
+        catch(NoSuchElementException nsee){
+            System.out.println("no existe ese elemento");
+        }
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
     }
+    
+    
+    
     /**
      * 
      * @param evt
@@ -1019,9 +1145,34 @@ BancoControlador bc = new BancoControlador();
      * @throws ClassNotFoundException 
      */
     private void jButton_borrar_bancoActionPerformed(java.awt.event.ActionEvent evt){
+      int id = getID();
+       Banco b;
+       int fila;
+        try {
+    
+      
+        Iterator it;
+        it = bancos.iterator();
+        while(it.hasNext()){
+            b = (Banco) it.next();
+            if (b.getnBanco() == id) {
+                b.setActivo(false);
+                fila = jTable_Banco.getSelectedRow();
+                DefaultTableModel modelo = (DefaultTableModel) jTable_Banco.getModel();
+                modelo.removeRow(fila);
+                jTable_Banco.setModel(modelo);
+            }
+           }
         
         
-        
+        bc.EscribirBanco(bancos);
+        cargarTabla();
+       } catch (IOException ex) {
+        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        catch(NoSuchElementException nsee){
+            System.out.println("no existe ese elemento");
+        }
     }
     
     
@@ -1084,6 +1235,9 @@ BancoControlador bc = new BancoControlador();
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel_DNI;
     private javax.swing.JLabel jLabel_anio_publicacion;
     private javax.swing.JLabel jLabel_autor;

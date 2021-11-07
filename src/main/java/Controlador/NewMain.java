@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import modelo.Banco;
 
 /**
@@ -32,16 +33,31 @@ public class NewMain {
         BancoControlador a = new BancoControlador();
          
          Banco c = new Banco("patata","patata","xcvbzxvxcv");
+         Banco x = new Banco("sdgjkanskd","asdgjkjskdg","sduakghasd");
          ArrayList bancos = new ArrayList();
          bancos.add(c);
-         
-         //a.añadirBanco(c);
          a.EscribirBanco(bancos);
-         //a.leerBanco();
-        
+         
+
+         
+         
+         
+        /* 
+         //a.añadirBanco(c);
+         bancos = a.leerBanco();
+         Iterator it = bancos.iterator();
+         while (it.hasNext()) {
+            c = (Banco) it.next();
+             System.out.println(c.getnBanco());
+             System.out.println(x.getnBanco());
+
+             
+            
+        }*/
            //jtable.repaint(); Repinta las celdas de la tabla
 
         
     }
+    }
     
-}
+
