@@ -82,12 +82,14 @@
                                   <Component id="jLabel_telefono" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_direccion" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_direccion1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextField_registros" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField_jefeBanco" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField_direccion_banco" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextField_Nombre_Banco" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -133,9 +135,14 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextField_jefeBanco" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel_direccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_Nombre_Banco" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton_cancelar_banco" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="110" max="32767" attributes="0"/>
+                      <EmptySpace pref="78" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -151,14 +158,20 @@
                 <Component class="javax.swing.JTable" name="jTable_Banco">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="0">
+                      <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="Direccion" type="java.lang.Object"/>
                         <Column editable="false" title="Registros" type="java.lang.Object"/>
                         <Column editable="false" title="Jefe Banco" type="java.lang.Object"/>
+                        <Column editable="false" title="Nombre Banco" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -262,6 +275,13 @@
                 <Property name="text" type="java.lang.String" value="Registros:"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nombre Banco:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField_Nombre_Banco">
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel_Sucursal">
@@ -278,41 +298,6 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel_nombre_ciudad" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_num_habitantes1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_num_habitantes2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel_num_habitantes" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel_pais" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jTextField_nombre_ciudad" pref="245" max="32767" attributes="0"/>
-                                          <Component id="jTextField_pais" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jTextField_num_habitantes" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jTextField_num_habitantes1" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jButton_guardar_sucursa" max="32767" attributes="0"/>
-                                          <Component id="jButton_cancelar_sucursa" pref="85" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jRadioButton2" min="-2" pref="21" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="452" max="-2" attributes="0"/>
@@ -320,7 +305,35 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jButton_modificar_sucursal" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jButton_aniadir_sucursal" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton_borrar_sucursa" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jButton_borrar_sucursal" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel_num_habitantes1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="jLabel_num_habitantes" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel_pais" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jTextField_Jefe_Sucursal" pref="200" max="32767" attributes="0"/>
+                                  <Component id="jTextField_Empresa_Sucursal" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextField_Direccion_Sucursal" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="jButton_cancelar_sucursal" min="-2" pref="85" max="-2" attributes="0"/>
+                                      <Component id="jButton_guardar_sucursal" min="-2" pref="85" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jComboBox_Sucursal_to_Banco" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -338,50 +351,41 @@
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="jButton_modificar_sucursal" min="-2" pref="23" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton_borrar_sucursa" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton_borrar_sucursal" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="92" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_nombre_ciudad" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_nombre_ciudad" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel_pais" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton_guardar_sucursa" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_pais" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_guardar_sucursal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_Direccion_Sucursal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="jButton_cancelar_sucursa" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel_num_habitantes" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel_num_habitantes" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField_num_habitantes1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jTextField_Empresa_Sucursal" pref="27" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel_num_habitantes1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_num_habitantes" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_Jefe_Sucursal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_cancelar_sucursal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_num_habitantes2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBox_Sucursal_to_Banco" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="53" max="32767" attributes="0"/>
+                      <EmptySpace pref="48" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -397,21 +401,15 @@
                 <Component class="javax.swing.JTable" name="jTable_Sucursal">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="0">
-                        <Column editable="false" title="N&#xaa; Sucursal" type="java.lang.Object"/>
+                      <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="Direcci&#xf3;n" type="java.lang.Object"/>
-                        <Column editable="true" title="Empresa" type="java.lang.Object"/>
+                        <Column editable="true" title="Empresa Sucursal" type="java.lang.Object"/>
                         <Column editable="true" title="Jefe Sucursal" type="java.lang.Object"/>
-                        <Column editable="true" title="Activo" type="java.lang.Object"/>
+                        <Column editable="true" title="Banco" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
@@ -460,18 +458,13 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_modificar_sucursalActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton_borrar_sucursa">
+            <Component class="javax.swing.JButton" name="jButton_borrar_sucursal">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Borrar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_borrar_sucursaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_borrar_sucursalActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_nombre_ciudad">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xba; Sucursal:"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel_pais">
               <Properties>
@@ -483,41 +476,33 @@
                 <Property name="text" type="java.lang.String" value="Empresa:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_nombre_ciudad">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_nombre_ciudadActionPerformed"/>
-              </Events>
+            <Component class="javax.swing.JTextField" name="jTextField_Direccion_Sucursal">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_pais">
+            <Component class="javax.swing.JTextField" name="jTextField_Jefe_Sucursal">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_num_habitantes">
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton_guardar_sucursa">
+            <Component class="javax.swing.JButton" name="jButton_guardar_sucursal">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_guardar_sucursaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_guardar_sucursalActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton_cancelar_sucursa">
+            <Component class="javax.swing.JButton" name="jButton_cancelar_sucursal">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_cancelar_sucursaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_cancelar_sucursalActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_num_habitantes1">
+            <Component class="javax.swing.JTextField" name="jTextField_Empresa_Sucursal">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -527,17 +512,7 @@
                 <Property name="text" type="java.lang.String" value="Jefe Sucursal:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_num_habitantes2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Activo:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jRadioButton1"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="jComboBox_Sucursal_to_Banco">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -589,17 +564,14 @@
                                   <Component id="jLabel_nombre_libro" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_autor" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_edad_recomendada" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_biblioteca_libro" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_anio_publicacion" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jTextField_anio_publicacion" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jTextField_nombre_libro" alignment="0" pref="245" max="32767" attributes="0"/>
-                                          <Component id="jTextField_autor" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jTextField_edad_recomendada" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextField_Cliente_Dni" alignment="0" pref="245" max="32767" attributes="0"/>
+                                          <Component id="jTextField_Nombre_Cliente" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextField_cliente_apellido" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -608,11 +580,10 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="jRadioButton4" min="-2" pref="21" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBox_Cliente_to_Sucursal" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -638,36 +609,29 @@
                               <Component id="jScrollPane3" min="-2" pref="92" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel_nombre_libro" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_nombre_libro" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_autor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_autor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_Cliente_Dni" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton_guardar_cliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_edad_recomendada" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_edad_recomendada" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton_cancelar_cliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_autor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_Nombre_Cliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_anio_publicacion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_anio_publicacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel_edad_recomendada" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_cliente_apellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_cancelar_cliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_biblioteca_libro" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBox_Cliente_to_Sucursal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="74" max="32767" attributes="0"/>
+                      <EmptySpace pref="83" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -683,12 +647,11 @@
                 <Component class="javax.swing.JTable" name="jTable_cliente">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="0">
+                      <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="DNI" type="java.lang.Object"/>
                         <Column editable="false" title="Nombre" type="java.lang.Object"/>
                         <Column editable="true" title="Apellido" type="java.lang.Object"/>
-                        <Column editable="true" title="N&#xba; Cliente" type="java.lang.Object"/>
-                        <Column editable="true" title="Activo" type="java.lang.Object"/>
+                        <Column editable="true" title="Sucursal" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -699,11 +662,6 @@
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -745,19 +703,14 @@
                 <Property name="text" type="java.lang.String" value="Apellido:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_biblioteca_libro">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Activo:"/>
-              </Properties>
+            <Component class="javax.swing.JTextField" name="jTextField_cliente_apellido">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_edad_recomendada">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_nombre_libro">
+            <Component class="javax.swing.JTextField" name="jTextField_Cliente_Dni">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_nombre_libroActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_Cliente_DniActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_autor">
+            <Component class="javax.swing.JTextField" name="jTextField_Nombre_Cliente">
             </Component>
             <Component class="javax.swing.JButton" name="jButton_guardar_cliente">
               <Properties>
@@ -805,19 +758,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_aniadir_clienteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_anio_publicacion">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xba; Cliente:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_anio_publicacion">
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton4">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jRadioButton1"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
+            <Component class="javax.swing.JComboBox" name="jComboBox_Cliente_to_Sucursal">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -851,7 +792,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -867,30 +808,26 @@
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel_nombre_persona" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_DNI" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_edad_persona" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_ciudad_natal" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_ciudad_natal1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jRadioButton5" min="-2" pref="21" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jComboBox3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jTextField_nombre_persona" alignment="0" pref="245" max="32767" attributes="0"/>
-                                  <Component id="jTextField_DNI" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField_edad_persona" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField_ciudad_natal" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jTextField_prestamo_fecha_prestamo" alignment="0" pref="245" max="32767" attributes="0"/>
+                                  <Component id="jTextField_prestamo_dinero" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextField_prestamo_intereses" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jButton_guardar_prestamo" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jButton_cancelar_prestamo" alignment="0" pref="85" max="32767" attributes="0"/>
                               </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jComboBox_prestamo_to_cliente" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -914,36 +851,31 @@
                               <Component id="jScrollPane4" min="-2" pref="92" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel_nombre_persona" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_nombre_persona" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_DNI" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_prestamo_fecha_prestamo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton_guardar_prestamo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_DNI" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel_edad_persona" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_edad_persona" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton_cancelar_prestamo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField_prestamo_dinero" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_ciudad_natal" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_ciudad_natal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButton_cancelar_prestamo" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="jLabel_ciudad_natal" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextField_prestamo_intereses" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_ciudad_natal1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBox_prestamo_to_cliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="53" max="32767" attributes="0"/>
+                      <EmptySpace pref="96" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -959,12 +891,11 @@
                 <Component class="javax.swing.JTable" name="jTable_prestamo">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="0">
+                      <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="FechadPrestamo" type="java.lang.Object"/>
-                        <Column editable="false" title="N&#xba; Pr&#xe9;stamo" type="java.lang.Object"/>
                         <Column editable="false" title="Dinero prestado" type="java.lang.Object"/>
                         <Column editable="false" title="Intereses" type="java.lang.Object"/>
-                        <Column editable="false" title="Activo" type="java.lang.Object"/>
+                        <Column editable="false" title="Cliente" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -979,17 +910,12 @@
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>
                         </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -1014,24 +940,17 @@
                 <Property name="text" type="java.lang.String" value="Fehca de pr&#xe9;stamo:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_DNI">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="N&#xba; de pr&#xe9;stamo:"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel_edad_persona">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dinero prestado:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_edad_persona">
+            <Component class="javax.swing.JTextField" name="jTextField_prestamo_dinero">
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_nombre_persona">
+            <Component class="javax.swing.JTextField" name="jTextField_prestamo_fecha_prestamo">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_nombre_personaActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_prestamo_fecha_prestamoActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_DNI">
             </Component>
             <Component class="javax.swing.JButton" name="jButton_guardar_prestamo">
               <Properties>
@@ -1087,22 +1006,9 @@
                 <Property name="text" type="java.lang.String" value="Intereses:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_ciudad_natal">
+            <Component class="javax.swing.JTextField" name="jTextField_prestamo_intereses">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel_ciudad_natal1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Activo"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton5">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jRadioButton1"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton5ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox3">
+            <Component class="javax.swing.JComboBox" name="jComboBox_prestamo_to_cliente">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -1114,7 +1020,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox_prestamo_to_clienteActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

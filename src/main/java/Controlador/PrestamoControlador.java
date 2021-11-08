@@ -15,9 +15,7 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import modelo.Cliente;
 import modelo.Prestamo;
-import modelo.Sucursal;
 
 /**
  *
@@ -36,69 +34,47 @@ public class PrestamoControlador {
     public PrestamoControlador() {
     }
 
-    public void añadirPrestamo(Prestamo p) {
-        prestamos.add(p);
-    }
-
-    /**
+     /**
      *
+     * @param sucursales
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public void escribirPrestamo() throws FileNotFoundException, IOException {
+    public void EscribirPrestamo(ArrayList<Prestamo> prestamos) throws FileNotFoundException, IOException {
         f = new File("Prestamo.dat");
-        fOut = new FileOutputStream(f, true);
+        fOut = new FileOutputStream(f);
         dataOS = new ObjectOutputStream(fOut);
         it = prestamos.iterator();
         while (it.hasNext()) {
-            Cliente c = (Cliente) it.next();
-            dataOS.writeObject(c);
+            Prestamo p = (Prestamo) it.next();
+            dataOS.writeObject(p);
         }
         dataOS.close();
 
     }
+    
 
-    /**
-     *
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-    public void leerCliente() throws FileNotFoundException, IOException, ClassNotFoundException {
-        Prestamo p;
-        f = new File("Prestamo.dat");
-        it = prestamos.iterator();
+    public ArrayList leerPrestamo() throws FileNotFoundException, IOException, ClassNotFoundException {
+        Prestamo p; // defino la variable banco
+        
+        File f = new File("Prestamo.dat");
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+        
         ObjectInputStream dataIS = new ObjectInputStream(new FileInputStream(f));
-        int i = 1;
         try {
             while (true) { // lectura del fichero
-                p = (Prestamo) dataIS.readObject(); // leer un Banco
-                System.out.print(i + "=>");
-                i++;
-                System.out.printf("Direccion " + p.getIntereses() + " JEFE " + p.getDineroPrestado());
+               p = (Prestamo) dataIS.readObject(); // leer banco
+               prestamos.add(p);
 
             }
         } catch (EOFException eo) {
-            System.out.println("\n FIN DE LECTURA.");
+            System.out.println("FIN DE LECTURA.");
         } catch (StreamCorruptedException x) {
         }
 
         dataIS.close(); // cerrar stream de entrada
-    }
-
-    public void leerToArray() throws FileNotFoundException, IOException, ClassNotFoundException {
-        Prestamo p;
-        f = new File("Prestamo.dat");
-        it = prestamos.iterator();
-        ObjectInputStream dataIS = new ObjectInputStream(new FileInputStream(f));
-        try {
-            while (true) {
-                p = (Prestamo) dataIS.readObject();
-                añadirPrestamo(p);
-            }
-        } catch (EOFException eo) {
-            System.out.println("\n FIN DE LECTURA.");
-        } catch (StreamCorruptedException x) {
-        }
+        return prestamos;
     }
 }

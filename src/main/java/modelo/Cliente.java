@@ -12,21 +12,45 @@ import java.io.Serializable;
  * @author usuario
  */
 public class Cliente implements Serializable{
-    String dni;
-    String nombre;
-    String apellido1;
-    String apellido2;
-    int nCliente;
-    boolean activo;
+   private String dni;
+   private String nombre;
+   private String apellido;
+   private int nCliente;
+   private boolean activo;
+   private int nSucursal;
+   private static int contador = 0;
 
-    public Cliente(String dni, String nombre, String apellido1, String apellido2, int nCliente, boolean activo) {
+    public Cliente(String dni, String nombre, String apellido, int nSucursal) {
+        this.nCliente = contador;
         this.dni = dni;
         this.nombre = nombre;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
-        this.nCliente = nCliente;
-        this.activo = activo;
+        this.apellido = apellido;
+        this.activo = true;
+        this.nSucursal = nSucursal;
+        incrementarContador();
     }
+
+    public int getnSucursal() {
+        return nSucursal;
+    }
+
+    
+    
+    
+    
+    
+     public static void setContador(int contador) {
+        Cliente.contador = contador;
+    }
+
+    private void incrementarContador() {
+        contador++;
+    }
+
+    public int getnContador() {
+        return contador;
+    }
+    
 
     public String getDni() {
         return dni;
@@ -36,13 +60,11 @@ public class Cliente implements Serializable{
         return nombre;
     }
 
-    public String getApellido1() {
-        return apellido1;
+    public String getApellido() {
+        return apellido;
     }
 
-    public String getApellido2() {
-        return apellido2;
-    }
+ 
 
     public int getnCliente() {
         return nCliente;

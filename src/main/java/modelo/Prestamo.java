@@ -12,20 +12,44 @@ import java.io.Serializable;
  * @author usuario
  */
 public class Prestamo implements Serializable{
-    String fechaPrestamo;
-    int nPrestamo;
-    int dineroPrestado;
-    int intereses;
-    boolean activo;
+   private String fechaPrestamo;
+   private int nPrestamo;
+   private int dineroPrestado;
+   private int intereses;
+   private int nCliente;
+   private boolean activo;
+   private static int contador = 0;
 
-    public Prestamo(String fechaPrestamo, int nPrestamo, int dineroPrestado, int intereses, boolean activo) {
+    public Prestamo(String fechaPrestamo, int dineroPrestado, int intereses, int nCliente) {
+        this.nPrestamo = contador;
         this.fechaPrestamo = fechaPrestamo;
-        this.nPrestamo = nPrestamo;
         this.dineroPrestado = dineroPrestado;
         this.intereses = intereses;
-        this.activo = activo;
+        this.activo = true;
+        this.nCliente = nCliente;
+        incrementarContador();
     }
 
+    public int getnCliente() {
+        return nCliente;
+    }
+   
+   
+   
+    
+    
+    
+    public static void setContador(int contador) {
+        Prestamo.contador = contador;
+    }
+
+    private void incrementarContador() {
+        contador++;
+    }
+
+    public int getnContador() {
+        return contador;
+    }
     public String getFechaPrestamo() {
         return fechaPrestamo;
     }
@@ -34,12 +58,12 @@ public class Prestamo implements Serializable{
         return nPrestamo;
     }
 
-    public int getDineroPrestado() {
-        return dineroPrestado;
+    public String getDineroPrestado() {
+        return String.valueOf(dineroPrestado);
     }
 
-    public int getIntereses() {
-        return intereses;
+    public String getIntereses() {
+        return String.valueOf(intereses);
     }
 
     public boolean isActivo() {

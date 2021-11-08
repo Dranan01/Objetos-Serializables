@@ -24,7 +24,11 @@ public class NewMain {
      * @throws java.io.FileNotFoundException
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        File f = new File("ficheroPrueba.dat");
+        File f = new File("Banco.dat");
+        File f2 = new File("Cliente.dat");
+        File f3 = new File("Prestamo.dat");
+        File f4 = new File("Sucursal.dat");
+        
         FileOutputStream fOut = new FileOutputStream(f, true);
         ObjectOutputStream dataOS = new ObjectOutputStream(fOut);
         

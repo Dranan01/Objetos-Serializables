@@ -15,9 +15,8 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import modelo.Banco;
 import modelo.Cliente;
-import modelo.Sucursal;
+
 
 /**
  *
@@ -28,7 +27,7 @@ public class ClienteControlador {
     File f;
     FileOutputStream fOut;
     ObjectOutputStream dataOS;
-    ArrayList<Sucursal> clientes = new ArrayList();
+    ArrayList<Cliente> clientes = new ArrayList();
     Iterator it;
     ObjectInputStream dataIS;
 
@@ -38,17 +37,18 @@ public class ClienteControlador {
     public ClienteControlador() {
     }
 
-    public void añadirCliente(Sucursal s) {
-        clientes.add(s);
-    }
+   
 
     /**
      *
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public void EscribirBanco(ArrayList<Cliente> clientes) throws FileNotFoundException, IOException {
+    public void EscribirCliente(ArrayList<Cliente> clientes) throws FileNotFoundException, IOException {
         f = new File("Cliente.dat");
+        if (!f.exists()) {
+            f.createNewFile();
+        }
         fOut = new FileOutputStream(f);
         dataOS = new ObjectOutputStream(fOut);
         it = clientes.iterator();
@@ -61,47 +61,27 @@ public class ClienteControlador {
     }
     
 
-    /**
-     *
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ClassNotFoundException
-     */
-    public void leerCliente() throws FileNotFoundException, IOException, ClassNotFoundException {
-        Sucursal s;
-        f = new File("Cliente.dat");
-        it = clientes.iterator();
+    public ArrayList leerCliente() throws FileNotFoundException, IOException, ClassNotFoundException {
+        Cliente c; // defino la variable banco
+        
+        File f = new File("Cliente.dat");
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+        
         ObjectInputStream dataIS = new ObjectInputStream(new FileInputStream(f));
-        int i = 1;
         try {
             while (true) { // lectura del fichero
-                s = (Sucursal) dataIS.readObject(); // leer un Banco
-                System.out.print(i + "=>");
-                i++;
-                System.out.printf("Direccion " + s.getDireccion() + " JEFE " + s.getJefe_sucursal());
+               c = (Cliente) dataIS.readObject(); // leer banco
+               clientes.add(c);
 
             }
         } catch (EOFException eo) {
-            System.out.println("\n FIN DE LECTURA.");
+            System.out.println("FIN DE LECTURA.");
         } catch (StreamCorruptedException x) {
         }
 
         dataIS.close(); // cerrar stream de entrada
-    }
-
-    public void leerToArray() throws FileNotFoundException, IOException, ClassNotFoundException {
-        Sucursal s;
-        f = new File("Cliente.dat");
-        it = clientes.iterator();
-        ObjectInputStream dataIS = new ObjectInputStream(new FileInputStream(f));
-        try {
-            while (true) {
-                s = (Sucursal) dataIS.readObject();
-                añadirCliente(s);
-            }
-        } catch (EOFException eo) {
-            System.out.println("\n FIN DE LECTURA.");
-        } catch (StreamCorruptedException x) {
-        }
+        return clientes;
     }
 }

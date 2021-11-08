@@ -15,7 +15,6 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import modelo.Banco;
 import modelo.Sucursal;
 
 /**
@@ -36,77 +35,51 @@ public class SucursalControlador {
     public SucursalControlador() {
     }
 
-    
-
-    
-    
-    
-    public void añadirSucursal(Sucursal s){
-        
-        sucursales.add(s);
-        
-    }
-    
-    /**
-     * 
+     /**
+     *
+     * @param sucursales
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
-    public void EscribirSucursal() throws FileNotFoundException, IOException{
+    public void EscribirSucursal(ArrayList<Sucursal> sucursales) throws FileNotFoundException, IOException {
         f = new File("Sucursal.dat");
-        fOut = new FileOutputStream(f,true);
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+        fOut = new FileOutputStream(f);
         dataOS = new ObjectOutputStream(fOut);
         it = sucursales.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Sucursal s = (Sucursal) it.next();
             dataOS.writeObject(s);
         }
-            dataOS.close();
-        
+        dataOS.close();
+
     }
     
-    /**
-     * 
-     * @throws FileNotFoundException
-     * @throws IOException
-     * @throws ClassNotFoundException 
-     */
-    public void leerBanco() throws FileNotFoundException, IOException, ClassNotFoundException{
-        Sucursal s;
-        f = new File("Sucursal.dat");
-        it = sucursales.iterator();
-        ObjectInputStream dataIS = new ObjectInputStream(new FileInputStream(f));
-        int i = 1;
-		try {
-			while (true) { // lectura del fichero
-				s = (Sucursal) dataIS.readObject(); // leer un Banco
-				System.out.print(i + "=>");
-				i++;
-				System.out.printf("Direccion "  +s.getDireccion() + " JEFE " + s.getJefe_sucursal());
 
-			}
-		} catch (EOFException eo) {
-			System.out.println("\n FIN DE LECTURA.");
-		} catch (StreamCorruptedException x) {
-		}
-
-		dataIS.close(); // cerrar stream de entrada
-	}
-    
-    public void leerToArray() throws FileNotFoundException, IOException, ClassNotFoundException {
-        Sucursal s;
-        f = new File("Sucursal.dat");
-        it = sucursales.iterator();
+    public ArrayList leerSucursal() throws FileNotFoundException, IOException, ClassNotFoundException {
+        Sucursal s; // defino la variable banco
+        
+        File f = new File("Sucursal.dat");
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+        
         ObjectInputStream dataIS = new ObjectInputStream(new FileInputStream(f));
         try {
-            while (true) {
-                s = (Sucursal) dataIS.readObject();
-                añadirSucursal(s);
+            while (true) { // lectura del fichero
+               s = (Sucursal) dataIS.readObject(); // leer banco
+               sucursales.add(s);
+
             }
         } catch (EOFException eo) {
-            System.out.println("\n FIN DE LECTURA.");
+            System.out.println("FIN DE LECTURA.");
         } catch (StreamCorruptedException x) {
         }
+
+        dataIS.close(); // cerrar stream de entrada
+        return sucursales;
     }
     
     

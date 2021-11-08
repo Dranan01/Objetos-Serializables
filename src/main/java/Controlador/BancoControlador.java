@@ -36,11 +36,13 @@ public class BancoControlador {
        
     }
 
-    public void añadirBanco(/*caracteristicas del banco al arrayList*/) {
-    }
+   
 
     public void EscribirBanco(ArrayList<Banco> bancos) throws FileNotFoundException, IOException {
         f = new File("Banco.dat");
+        if (!f.exists()) {
+            f.createNewFile();
+        }
         fOut = new FileOutputStream(f);
         dataOS = new ObjectOutputStream(fOut);
         it = bancos.iterator();

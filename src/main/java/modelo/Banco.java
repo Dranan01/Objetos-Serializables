@@ -17,18 +17,28 @@ public class Banco implements Serializable{
    private String direccion;
    private String registros;
    private String jefeBanco;
+   private String nombreBanco;
    private boolean activo;
    private static int contador = 0;
    
    
-    public Banco(String direccion, String registros, String jefeBanco) {
+    public Banco(String direccion, String registros, String jefeBanco, String nombreBanco) {
         this.nBanco = contador;
         this.direccion = direccion;
         this.registros = registros;
         this.jefeBanco = jefeBanco;
+        this.nombreBanco = nombreBanco;
         this.activo = true;
         incrementarContador();
         
+    }
+
+    public void setNombreBanco(String nombreBanco) {
+        this.nombreBanco = nombreBanco;
+    }
+
+    public String getNombreBanco() {
+        return nombreBanco;
     }
     
     

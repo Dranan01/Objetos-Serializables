@@ -11,20 +11,44 @@ import java.io.Serializable;
  *
  * @author usuario
  */
-public class Sucursal implements Serializable{
+public class Sucursal implements Serializable {
 
     private int nSucursal;
     private String direccion;
     private String empresa;
     private String jefe_sucursal;
     private boolean activo;
+    private int nBanco;
+    
+    private static int contador = 0;
 
-    public Sucursal(int nSucursal, String direccion, String empresa, String jefe_sucursal, boolean activo) {
-        this.nSucursal = nSucursal;
+    public Sucursal(String direccion, String empresa, String jefe_sucursal, int nBanco) {
+        this.nSucursal = contador;
         this.direccion = direccion;
         this.empresa = empresa;
         this.jefe_sucursal = jefe_sucursal;
-        this.activo = activo;
+        this.activo = true;
+        this.nBanco = nBanco;
+        incrementarContador();
+    }
+
+    public int getnBanco() {
+        return nBanco;
+    }
+    
+    
+    
+    
+    public static void setContador(int contador) {
+        Sucursal.contador = contador;
+    }
+
+    private void incrementarContador() {
+        contador++;
+    }
+
+    public int getnContador() {
+        return contador;
     }
 
     public int getnSucursal() {
@@ -51,7 +75,5 @@ public class Sucursal implements Serializable{
     public String toString() {
         return "Sucursal{" + "nSucursal=" + nSucursal + ", direccion=" + direccion + ", empresa=" + empresa + ", jefe_sucursal=" + jefe_sucursal + ", activo=" + activo + '}';
     }
-    
-    
 
 }
