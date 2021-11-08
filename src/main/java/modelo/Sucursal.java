@@ -71,6 +71,24 @@ public class Sucursal implements Serializable {
         return activo;
     }
 
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
+    public void setJefe_sucursal(String jefe_sucursal) {
+        this.jefe_sucursal = jefe_sucursal;
+    }
+
+    public void setnBanco(int nBanco) {
+        this.nBanco = nBanco;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Sucursal{" + "nSucursal=" + nSucursal + ", direccion=" + direccion + ", empresa=" + empresa + ", jefe_sucursal=" + jefe_sucursal + ", activo=" + activo + '}';

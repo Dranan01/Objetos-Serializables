@@ -33,13 +33,13 @@ public class Prestamo implements Serializable{
     public int getnCliente() {
         return nCliente;
     }
-   
-   
-   
+
+    public void setnCliente(int nCliente) {
+        this.nCliente = nCliente;
+    }
     
     
-    
-    public static void setContador(int contador) {
+   public static void setContador(int contador) {
         Prestamo.contador = contador;
     }
 
@@ -54,17 +54,39 @@ public class Prestamo implements Serializable{
         return fechaPrestamo;
     }
 
+    public void setFechaPrestamo(String fechaPrestamo) {
+        this.fechaPrestamo = fechaPrestamo;
+    }
+    
+
     public int getnPrestamo() {
         return nPrestamo;
     }
+    
 
     public String getDineroPrestado() {
         return String.valueOf(dineroPrestado);
     }
 
+    public void setDineroPrestado(int dineroPrestado) {
+        this.dineroPrestado = dineroPrestado;
+    }
+    
+
     public String getIntereses() {
         return String.valueOf(intereses);
     }
+
+    public void setIntereses(int intereses) {
+        this.intereses = intereses;
+    }
+    
+    
+
+    public void setnPrestamo(int nPrestamo) {
+        this.nPrestamo = nPrestamo;
+    }
+    
 
     public boolean isActivo() {
         return activo;

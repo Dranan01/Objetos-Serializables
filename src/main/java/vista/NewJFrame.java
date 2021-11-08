@@ -192,12 +192,13 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     public void rellenarComboBoxSucursal() throws IOException, FileNotFoundException, ClassNotFoundException {
+       
         bancos = bc.leerBanco();
         Banco b;
-        Iterator it = bancos.iterator();
+        Iterator<Banco> it = bancos.iterator();
         jComboBox_Sucursal_to_Banco.removeAllItems();
         while (it.hasNext()) {
-            b = (Banco) it.next();
+            b = it.next();
             jComboBox_Sucursal_to_Banco.addItem(b.getNombreBanco());
 
         }
@@ -205,6 +206,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     public void rellenarComboBoxCliente() throws IOException, FileNotFoundException, ClassNotFoundException {
+
         sucursales = sc.leerSucursal();
         Sucursal s;
         Iterator it = sucursales.iterator();
@@ -218,6 +220,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     public void rellenarComboBoxPrestamo() throws IOException, FileNotFoundException, ClassNotFoundException {
+
         clientes = cc.leerCliente();
         Cliente c;
         Iterator it = clientes.iterator();
@@ -273,6 +276,9 @@ public class NewJFrame extends javax.swing.JFrame {
         array[1] = jTextField_prestamo_dinero.getText();
         array[2] = jTextField_prestamo_intereses.getText();
         array[3] = jComboBox_prestamo_to_cliente.getSelectedItem().toString();
+        
+        DefaultTableModel dt = (DefaultTableModel) jTable_prestamo.getModel();
+        dt.addRow(array);
 
     }
 
@@ -376,6 +382,72 @@ public class NewJFrame extends javax.swing.JFrame {
         }
         return id;
     }
+    
+    public int getIDDesdeTablaSucursal(){
+        int id = 0;
+        Sucursal s;
+        int fila;
+        fila = jTable_Sucursal.getSelectedRow();
+        String direccion = jTable_Sucursal.getValueAt(fila, 0).toString();
+        String empresa = jTable_Sucursal.getValueAt(fila, 1).toString();
+        Iterator it = sucursales.iterator();
+        while (it.hasNext()) {
+            s = (Sucursal) it.next();
+            String direccionb = s.getDireccion();
+            String empresab = s.getEmpresa();
+
+            if (direccion.equals(direccionb) && empresa.equals(empresab)) {
+                id = s.getnSucursal();
+            }
+
+        }
+        return id;
+    }
+    
+    public int getIDDesdeTablaCliente(){
+        int id = 0;
+        Cliente c;
+        int fila;
+        fila = jTable_cliente.getSelectedRow();
+        String dni = jTable_cliente.getValueAt(fila, 1).toString();
+        Iterator it = clientes.iterator();
+        while (it.hasNext()) {
+            c = (Cliente) it.next();
+            String dnib = c.getDni();
+
+            if (dni.equals(dnib)) {
+                id = c.getnCliente();
+            }
+
+        }
+        return id;
+    }
+     
+    
+    public int getIDDesdeTablaPrestamo(){
+        int id = 0;
+        Prestamo p;
+        int fila;
+        fila = jTable_prestamo.getSelectedRow();
+        String fechaPrestamo = jTable_prestamo.getValueAt(fila, 1).toString();
+        String dineroPrestado = jTable_prestamo.getValueAt(fila, 1).toString();
+        String intereses = jTable_prestamo.getValueAt(fila, 1).toString();
+        Iterator it = prestamos.iterator();
+        while (it.hasNext()) {
+            p = (Prestamo) it.next();
+            String fechab = p.getFechaPrestamo();
+            String dinerob = p.getDineroPrestado();
+            String interesesb = p.getIntereses();
+
+            if (fechaPrestamo.equals(fechab) && dinerob.equals(dineroPrestado) && interesesb.equals(intereses) ) {
+                id = p.getnPrestamo();
+            }
+
+        }
+        return id;
+    };
+    
+    
 
     /**
      * Creates new form Ventana1
@@ -390,9 +462,25 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() throws IOException, FileNotFoundException, ClassNotFoundException, NotSerializableException, SAXException {
         initComponents();
+                try {
         rellenarComboBoxSucursal();
         rellenarComboBoxPrestamo();
         rellenarComboBoxCliente();
+            prestamos = pc.leerPrestamo();
+            clientes = cc.leerCliente();
+            sucursales = sc.leerSucursal();
+            bancos = bc.leerBanco();
+            cargarTablaBancos();
+            cargarTablaClientes();
+            cargarTablaSucursal();
+            cargarTablaPrestamos();
+
+        } catch (IOException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
     }
 
@@ -1165,21 +1253,7 @@ public class NewJFrame extends javax.swing.JFrame {
      * @param evt
      */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        try {
-            prestamos = pc.leerPrestamo();
-            clientes = cc.leerCliente();
-            sucursales = sc.leerSucursal();
-            bancos = bc.leerBanco();
-            cargarTablaBancos();
-            cargarTablaClientes();
-            cargarTablaSucursal();
-            cargarTablaPrestamos();
 
-        } catch (IOException ex) {
-            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_formWindowActivated
 
     private void jTextField_direccion_bancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_direccion_bancoActionPerformed
@@ -1376,13 +1450,42 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void jButton_modificar_sucursalActionPerformed(java.awt.event.ActionEvent evt) {
+        
+        if (!jTextField_Jefe_Sucursal.getText().equals("") || !jTextField_Empresa_Sucursal.getText().equals("") || !jTextField_Direccion_Sucursal.getText().equals("")) {
+            int id = getIDDesdeTablaSucursal();
+            Sucursal b;
+            try {
+
+                Iterator it;
+                it = sucursales.iterator();
+                while (it.hasNext()) {
+                    b = (Sucursal) it.next();
+                    if (b.getnSucursal()== id) {
+                        b.setDireccion(jTextField_Direccion_Sucursal.getText());
+                        b.setEmpresa(jTextField_Empresa_Sucursal.getText());
+                        b.setJefe_sucursal(jTextField_Jefe_Sucursal.getText());
+                        b.setnBanco(getIdPorNombreBanco(jComboBox_Sucursal_to_Banco.getSelectedItem().toString()));
+                    }
+                }
+
+                sc.EscribirSucursal(sucursales);
+                cargarTablaSucursal();
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchElementException nsee) {
+                System.out.println("no existe ese elemento");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
 
     private void jButton_borrar_sucursalActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     private void jButton_guardar_sucursalActionPerformed(java.awt.event.ActionEvent evt) { //direccion empresa jefe, banco
-         if (!jTextField_Jefe_Sucursal.getText().equals("") || !jTextField_Empresa_Sucursal.getText().equals("") || !jTextField_Direccion_Sucursal.getText().equals("")) {
+        if (!jTextField_Jefe_Sucursal.getText().equals("") || !jTextField_Empresa_Sucursal.getText().equals("") || !jTextField_Direccion_Sucursal.getText().equals("")) {
 
             Sucursal b;
             String direccion = jTextField_Direccion_Sucursal.getText();
@@ -1433,7 +1536,7 @@ public class NewJFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
 
     private void jButton_cancelar_clienteActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1444,12 +1547,39 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void jButton_modificar_clienteActionPerformed(java.awt.event.ActionEvent evt) {
+       if (!jTextField_Cliente_Dni.getText().equals("") || !jTextField_Nombre_Cliente.getText().equals("") || !jTextField_cliente_apellido.getText().equals("")) {
+            int id = getIDDesdeTablaCliente();
+            Cliente b;
+            try {
+
+                Iterator it;
+                it = clientes.iterator();
+                while (it.hasNext()) {
+                    b = (Cliente) it.next();
+                    if (b.getnCliente()== id) {
+                        b.setDni(jTextField_Cliente_Dni.getText());
+                        b.setNombre(jTextField_Nombre_Cliente.getText());
+                        b.setApellido(jTextField_cliente_apellido.getText());
+                        b.setnSucursal(getIdPorNombreSucursal(jComboBox_Cliente_to_Sucursal.getSelectedItem().toString()));
+                    }
+                }
+
+                cc.EscribirCliente(clientes);
+                cargarTablaClientes();
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchElementException nsee) {
+                System.out.println("no existe ese elemento");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void jButton_aniadir_clienteActionPerformed(java.awt.event.ActionEvent evt) {
         if (!jTextField_Cliente_Dni.getText().equals("") || !jTextField_Nombre_Cliente.getText().equals("") || !jTextField_cliente_apellido.getText().equals("")) {
             añadirATablaCliente();
-            limpiarTextoSucursal();
+            limpiarTextoCliente();
         } else {
             JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1457,14 +1587,14 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void jButton_guardar_prestamoActionPerformed(java.awt.event.ActionEvent evt) { // fecha dinero intereses cliente
-                if (!jTextField_Cliente_Dni.getText().equals("") || !jTextField_Nombre_Cliente.getText().equals("") || !jTextField_cliente_apellido.getText().equals("")) {
+        if (!jTextField_prestamo_dinero.getText().equals("") || !jTextField_prestamo_intereses.getText().equals("") || !jTextField_prestamo_intereses.getText().equals("")) {
 
             Prestamo b;
             String fecha = jTextField_prestamo_fecha_prestamo.getText();
             int dinero = Integer.valueOf(jTextField_prestamo_dinero.getText());
             int intereses = Integer.valueOf(jTextField_prestamo_intereses.getText());
             int idCliente = getIdPorNombreBanco(jComboBox_prestamo_to_cliente.getSelectedItem().toString());
-            Cliente.setContador(clientes.size());
+            Prestamo.setContador(prestamos.size());
             b = new Prestamo(fecha, dinero, intereses, idCliente);
             prestamos.add(b);
 
@@ -1477,7 +1607,7 @@ public class NewJFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }
 
     private void jButton_cancelar_prestamoActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1488,12 +1618,40 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void jButton_modificar_prestamoActionPerformed(java.awt.event.ActionEvent evt) {
+                if (!jTextField_prestamo_dinero.getText().equals("") || !jTextField_prestamo_intereses.getText().equals("") || !jTextField_prestamo_intereses.getText().equals("")) {
+            int id = getIDDesdeTablaPrestamo();
+            Prestamo b;
+            try {
+
+                Iterator it;
+                it = prestamos.iterator();
+                while (it.hasNext()) {
+                    b = (Prestamo) it.next();
+                    if (b.getnPrestamo()== id) { //fecha dinero intereses cliente
+                        b.setFechaPrestamo(jTextField_prestamo_fecha_prestamo.getText());
+                        b.setDineroPrestado(Integer.valueOf(jTextField_prestamo_dinero.getText()));
+                        b.setIntereses(Integer.valueOf(jTextField_prestamo_intereses.getText()));
+                        b.setnCliente(getIdPorNombreCliente(jComboBox_prestamo_to_cliente.getSelectedItem().toString()));
+                    }
+                }
+
+                pc.EscribirPrestamo(prestamos);
+                cargarTablaPrestamos();
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchElementException nsee) {
+                System.out.println("no existe ese elemento");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
     }
+    
 
     private void jButton_aniadir_prestamoActionPerformed(java.awt.event.ActionEvent evt) {
         if (!jTextField_prestamo_dinero.getText().equals("") || !jTextField_prestamo_intereses.getText().equals("") || !jTextField_prestamo_intereses.getText().equals("")) {
-            añadirATablaCliente();
-            limpiarTextoSucursal();
+            añadirATablaPrestamo();
+            limpiarTextoPrestamo();
         } else {
             JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
         }

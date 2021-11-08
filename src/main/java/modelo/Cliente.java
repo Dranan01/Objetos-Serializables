@@ -30,11 +30,19 @@ public class Cliente implements Serializable{
         incrementarContador();
     }
 
+    
+    
+    
+    
+    
+    
     public int getnSucursal() {
         return nSucursal;
     }
 
-    
+    public void setnSucursal(int nSucursal) {
+        this.nSucursal = nSucursal;
+    }
     
     
     
@@ -50,25 +58,39 @@ public class Cliente implements Serializable{
     public int getnContador() {
         return contador;
     }
-    
 
     public String getDni() {
         return dni;
     }
 
-    public String getNombre() {
-        return nombre;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getApellido() {
         return apellido;
     }
 
- 
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
     public int getnCliente() {
         return nCliente;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
+    
+
+  
 
     public boolean isActivo() {
         return activo;
