@@ -61,374 +61,341 @@ import org.xml.sax.helpers.XMLReaderFactory;
  * @author Fran
  */
 public class NewJFrame extends javax.swing.JFrame {
-ArrayList<Banco> bancos;
-ArrayList<Sucursal> sucursales;
-ArrayList<Prestamo> prestamos;
-ArrayList<Cliente> clientes;
-BancoControlador bc = new BancoControlador(); 
-ClienteControlador cc = new ClienteControlador();
-PrestamoControlador pc = new PrestamoControlador();
-SucursalControlador sc = new SucursalControlador();
-    
 
+    ArrayList<Banco> bancos;
+    ArrayList<Sucursal> sucursales;
+    ArrayList<Prestamo> prestamos;
+    ArrayList<Cliente> clientes;
+    BancoControlador bc = new BancoControlador();
+    ClienteControlador cc = new ClienteControlador();
+    PrestamoControlador pc = new PrestamoControlador();
+    SucursalControlador sc = new SucursalControlador();
 
-    public void limpiarTextoBanco(){
+    public void limpiarTextoBanco() {
         jTextField_direccion_banco.setText("");
         jTextField_jefeBanco.setText("");
         jTextField_registros.setText("");
     }
-    
-    public void limpiarTextoSucursal(){
+
+    public void limpiarTextoSucursal() {
         jTextField_Direccion_Sucursal.setText("");
         jTextField_Empresa_Sucursal.setText("");
         jTextField_Jefe_Sucursal.setText("");
-   }
-    
-    public void limpiarTextoCliente(){
+    }
+
+    public void limpiarTextoCliente() {
         jTextField_Nombre_Cliente.setText("");
         jTextField_cliente_apellido.setText("");
         jTextField_Cliente_Dni.setText("");
     }
-    
-    public void limpiarTextoPrestamo(){
+
+    public void limpiarTextoPrestamo() {
         jTextField_prestamo_dinero.setText("");
         jTextField_prestamo_fecha_prestamo.setText("");
         jTextField_prestamo_intereses.setText("");
     }
-    
-    public void cargarTablaBancos(){
-        
+
+    public void cargarTablaBancos() {
+
         String matriz[][] = new String[bancos.size()][4];
-    
+
         for (int i = 0; i < bancos.size(); i++) {
             if (bancos.get(i).isActivo() == true) {
-                
-            
-            matriz[i][0] = bancos.get(i).getDireccion();
-            matriz[i][1] = bancos.get(i).getJefeBanco();
-            matriz[i][2] = bancos.get(i).getRegistros();
-            matriz[i][3] = bancos.get(i).getNombreBanco();
-        
-        
-    jTable_Banco.setModel(new javax.swing.table.DefaultTableModel(
-            matriz,
-            new String [] {
-                "Direccion", "Registros", "Jefe Banco", "Nombre Banco"
+
+                matriz[i][0] = bancos.get(i).getDireccion();
+                matriz[i][1] = bancos.get(i).getJefeBanco();
+                matriz[i][2] = bancos.get(i).getRegistros();
+                matriz[i][3] = bancos.get(i).getNombreBanco();
+
+                jTable_Banco.setModel(new javax.swing.table.DefaultTableModel(
+                        matriz,
+                        new String[]{
+                            "Direccion", "Registros", "Jefe Banco", "Nombre Banco"
+                        }
+                ));
+
             }
-                    ));
-   
-     }
         }
-}
-    
-    
-    public void cargarTablaClientes(){
-        
+    }
+
+    public void cargarTablaClientes() {
+
         String matriz[][] = new String[clientes.size()][4];
-        
+
         for (int i = 0; i < clientes.size(); i++) {
             int id;
             if (clientes.get(i).isActivo() == true) {
-            id = clientes.get(i).getnSucursal();
-            
-            matriz[i][0] = clientes.get(i).getApellido();
-            matriz[i][1] = clientes.get(i).getNombre();
-            matriz[i][2] = clientes.get(i).getDni();
-            matriz[i][3] = getNombreSucursal(id);
-            
-        
-        
-    jTable_cliente.setModel(new javax.swing.table.DefaultTableModel(
-            matriz,
-            new String [] {
-                "Apellido", "Nombre", "DNI", "Sucursal"
+                id = clientes.get(i).getnSucursal();
+
+                matriz[i][0] = clientes.get(i).getApellido();
+                matriz[i][1] = clientes.get(i).getNombre();
+                matriz[i][2] = clientes.get(i).getDni();
+                matriz[i][3] = getNombreSucursal(id);
+
+                jTable_cliente.setModel(new javax.swing.table.DefaultTableModel(
+                        matriz,
+                        new String[]{
+                            "Apellido", "Nombre", "DNI", "Sucursal"
+                        }
+                ));
+
             }
-                    ));
-   
-     }
         }
     }
-    
-    public void cargarTablaPrestamos(){
+
+    public void cargarTablaPrestamos() {
         String matriz[][] = new String[prestamos.size()][4];
         int id;
-                
+
         for (int i = 0; i < prestamos.size(); i++) {
             if (prestamos.get(i).isActivo() == true) {
-            id = prestamos.get(i).getnCliente();
-            
-            matriz[i][0] = prestamos.get(i).getFechaPrestamo();
-            matriz[i][1] = prestamos.get(i).getDineroPrestado();
-            matriz[i][2] = prestamos.get(i).getIntereses();
-            matriz[i][3] = getNombreCliente(id);    
-        
-        
-    jTable_prestamo.setModel(new javax.swing.table.DefaultTableModel(
-            matriz,
-            new String [] {
-                "Fecha prestamo", "Dinero prestado", "Intereses", "Cliente"
+                id = prestamos.get(i).getnCliente();
+
+                matriz[i][0] = prestamos.get(i).getFechaPrestamo();
+                matriz[i][1] = prestamos.get(i).getDineroPrestado();
+                matriz[i][2] = prestamos.get(i).getIntereses();
+                matriz[i][3] = getNombreCliente(id);
+
+                jTable_prestamo.setModel(new javax.swing.table.DefaultTableModel(
+                        matriz,
+                        new String[]{
+                            "Fecha prestamo", "Dinero prestado", "Intereses", "Cliente"
+                        }
+                ));
+
             }
-                    ));
-   
-     }
         }
     }
-    
-    
-    public void cargarTablaSucursal(){
-         String matriz[][] = new String[sucursales.size()][4];
+
+    public void cargarTablaSucursal() {
+        String matriz[][] = new String[sucursales.size()][4];
         int id;
         for (int i = 0; i < sucursales.size(); i++) {
-            
+
             if (sucursales.get(i).isActivo() == true) {
-            id = sucursales.get(i).getnBanco();
-            
-            matriz[i][0] = sucursales.get(i).getDireccion();
-            matriz[i][1] = sucursales.get(i).getEmpresa();
-            matriz[i][2] = sucursales.get(i).getJefe_sucursal();
-            matriz[i][3] = getNombreBanco(id);
-            
-        
-        
-    jTable_Sucursal.setModel(new javax.swing.table.DefaultTableModel(
-            matriz,
-            new String [] {
-                "Direccion", "Empresa", "Jefe Sucursal", "Banco"
+                id = sucursales.get(i).getnBanco();
+
+                matriz[i][0] = sucursales.get(i).getDireccion();
+                matriz[i][1] = sucursales.get(i).getEmpresa();
+                matriz[i][2] = sucursales.get(i).getJefe_sucursal();
+                matriz[i][3] = getNombreBanco(id);
+
+                jTable_Sucursal.setModel(new javax.swing.table.DefaultTableModel(
+                        matriz,
+                        new String[]{
+                            "Direccion", "Empresa", "Jefe Sucursal", "Banco"
+                        }
+                ));
+
             }
-                    ));
-   
-     }
         }
     }
-    
-    public void rellenarComboBoxSucursal() throws IOException, FileNotFoundException, ClassNotFoundException{
+
+    public void rellenarComboBoxSucursal() throws IOException, FileNotFoundException, ClassNotFoundException {
         bancos = bc.leerBanco();
         Banco b;
         Iterator it = bancos.iterator();
         jComboBox_Sucursal_to_Banco.removeAllItems();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             b = (Banco) it.next();
             jComboBox_Sucursal_to_Banco.addItem(b.getNombreBanco());
-            
+
         }
         bancos.clear();
     }
-   
-    public void rellenarComboBoxCliente()throws IOException, FileNotFoundException, ClassNotFoundException{
+
+    public void rellenarComboBoxCliente() throws IOException, FileNotFoundException, ClassNotFoundException {
         sucursales = sc.leerSucursal();
         Sucursal s;
         Iterator it = sucursales.iterator();
         jComboBox_Cliente_to_Sucursal.removeAllItems();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             s = (Sucursal) it.next();
             jComboBox_Cliente_to_Sucursal.addItem(s.getEmpresa());
-            
+
         }
         sucursales.clear();
     }
-    
-    public void rellenarComboBoxPrestamo() throws IOException, FileNotFoundException, ClassNotFoundException{
-         clientes = cc.leerCliente();
+
+    public void rellenarComboBoxPrestamo() throws IOException, FileNotFoundException, ClassNotFoundException {
+        clientes = cc.leerCliente();
         Cliente c;
         Iterator it = clientes.iterator();
         jComboBox_prestamo_to_cliente.removeAllItems();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             c = (Cliente) it.next();
             jComboBox_prestamo_to_cliente.addItem(c.getNombre());
-           }
+        }
         clientes.clear();
     }
-    
-    
-    
-    
-    
 
-    public void añadirATablaBanco(){
+    public void añadirATablaBanco() {
         String[] array = new String[3];
-        
+
         array[0] = jTextField_direccion_banco.getText();
         array[1] = jTextField_registros.getText();
         array[2] = jTextField_jefeBanco.getText();
         array[3] = jTextField_Nombre_Banco.getText();
-        
+
         DefaultTableModel dt = (DefaultTableModel) jTable_Banco.getModel();
         dt.addRow(array);
     }
-    
-    
-    public void añadirATablaSucursal(){ //direccion empresa jefe Banco
+
+    public void añadirATablaSucursal() { //direccion empresa jefe Banco
         String[] array = new String[4];
-        
+
         array[0] = jTextField_Direccion_Sucursal.getText();
         array[1] = jTextField_Empresa_Sucursal.getText();
         array[2] = jTextField_Jefe_Sucursal.getText();
         array[3] = jComboBox_Sucursal_to_Banco.getSelectedItem().toString();
-        
+
         DefaultTableModel dt = (DefaultTableModel) jTable_Sucursal.getModel();
         dt.addRow(array);
     }
-    
-    public void añadirATablaCliente(){ // DNI NOMBRE APELLIDO SUCURSAL
+
+    public void añadirATablaCliente() { // DNI NOMBRE APELLIDO SUCURSAL
         String[] array = new String[4];
-        
+
         array[0] = jTextField_Cliente_Dni.getText();
         array[1] = jTextField_Nombre_Cliente.getText();
         array[2] = jTextField_cliente_apellido.getText();
         array[3] = jComboBox_Cliente_to_Sucursal.getSelectedItem().toString();
-        
+
         DefaultTableModel dt = (DefaultTableModel) jTable_cliente.getModel();
         dt.addRow(array);
-        
+
     }
-    
-    public void añadirATablaPrestamo(){ //fecha dineroprestado intereses cliente
+
+    public void añadirATablaPrestamo() { //fecha dineroprestado intereses cliente
         String array[] = new String[4];
-        
+
         array[0] = jTextField_prestamo_fecha_prestamo.getText();
         array[1] = jTextField_prestamo_dinero.getText();
         array[2] = jTextField_prestamo_intereses.getText();
         array[3] = jComboBox_prestamo_to_cliente.getSelectedItem().toString();
-        
-        
-        
-        
+
     }
-    
-    
-    
-    public String getNombreBanco(int id){
-        String nombre ="";
+
+    public String getNombreBanco(int id) {
+        String nombre = "";
         Banco b;
         Iterator it = bancos.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             b = (Banco) it.next();
-             if(b.getnBanco() == id) {
+            if (b.getnBanco() == id) {
                 nombre = b.getNombreBanco();
             }
-    }
+        }
         return nombre;
     }
-    
-    
-    public String getNombreSucursal(int id){
-        String nombre ="";
+
+    public String getNombreSucursal(int id) {
+        String nombre = "";
         Sucursal b;
         Iterator it = sucursales.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             b = (Sucursal) it.next();
-             if(b.getnSucursal()== id) {
+            if (b.getnSucursal() == id) {
                 nombre = b.getEmpresa();
             }
-    }
+        }
         return nombre;
     }
-        
-    public String getNombreCliente(int id){
-        String nombre ="";
+
+    public String getNombreCliente(int id) {
+        String nombre = "";
         Cliente b;
         Iterator it = clientes.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             b = (Cliente) it.next();
-             if(b.getnCliente()== id) {
+            if (b.getnCliente() == id) {
                 nombre = b.getNombre();
             }
-    }
+        }
         return nombre;
-        
+
     }
-    
-    
-    public int getIdPorNombreBanco(String nombre){
-        int id = 0 ;
+
+    public int getIdPorNombreBanco(String nombre) {
+        int id = 0;
         Banco b;
         Iterator it = bancos.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             b = (Banco) it.next();
-             if(b.getNombreBanco().equals(nombre)) {
+            if (b.getNombreBanco().equals(nombre)) {
                 id = b.getnBanco();
             }
-    }
+        }
         return id;
     }
-   
-    public int getIdPorNombreSucursal(String nombre){
+
+    public int getIdPorNombreSucursal(String nombre) {
         int id = 0;
         Sucursal b;
         Iterator it = sucursales.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             b = (Sucursal) it.next();
-             if(b.getEmpresa().equals(nombre)) {
+            if (b.getEmpresa().equals(nombre)) {
                 id = b.getnSucursal();
             }
-    }
+        }
         return id;
     }
-    
-    
-    public int getIdPorNombreCliente(String nombre){
+
+    public int getIdPorNombreCliente(String nombre) {
         int id = 0;
         Cliente b;
         Iterator it = clientes.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             b = (Cliente) it.next();
-             if(b.getNombre().equals(nombre)) {
+            if (b.getNombre().equals(nombre)) {
                 id = b.getnCliente();
             }
-    }
+        }
         return id;
-        
-        
+
     }
-    
-    
-    
-    
-        
-    public int getIDDesdeTablaBanco(){
+
+    public int getIDDesdeTablaBanco() {
         int id = 0;
         Banco b;
         int fila;
         fila = jTable_Banco.getSelectedRow();
-        String registros = jTable_Banco.getValueAt(fila,2).toString();
-        String jefe_Banco = jTable_Banco.getValueAt(fila,1).toString();
+        String registros = jTable_Banco.getValueAt(fila, 2).toString();
+        String jefe_Banco = jTable_Banco.getValueAt(fila, 1).toString();
         Iterator it = bancos.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             b = (Banco) it.next();
             String registrosb = b.getRegistros();
             String jefeBancob = b.getJefeBanco();
-            
-            
+
             if (registros.equals(registrosb) && jefe_Banco.equals(jefeBancob)) {
                 id = b.getnBanco();
             }
-            
-    }
+
+        }
         return id;
     }
-    
-    
-    
 
     /**
      * Creates new form Ventana1
      */
     /**
-     * 
+     *
      * @throws IOException
      * @throws FileNotFoundException
      * @throws ClassNotFoundException
      * @throws NotSerializableException
-     * @throws SAXException 
+     * @throws SAXException
      */
     public NewJFrame() throws IOException, FileNotFoundException, ClassNotFoundException, NotSerializableException, SAXException {
         initComponents();
         rellenarComboBoxSucursal();
         rellenarComboBoxPrestamo();
         rellenarComboBoxCliente();
-        
+
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -468,7 +435,6 @@ SucursalControlador sc = new SucursalControlador();
             }
         });
     }
-        
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1195,26 +1161,25 @@ SucursalControlador sc = new SucursalControlador();
     }//GEN-LAST:event_jComboBox_prestamo_to_clienteActionPerformed
 
     /**
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-    try {
-       prestamos = pc.leerPrestamo();
-       clientes = cc.leerCliente();
-       sucursales = sc.leerSucursal();
-       bancos = bc.leerBanco(); 
-        cargarTablaBancos();
-        cargarTablaClientes();
-        cargarTablaSucursal();
-        cargarTablaPrestamos();
-        
-        
-    } catch (IOException ex) {
-        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            prestamos = pc.leerPrestamo();
+            clientes = cc.leerCliente();
+            sucursales = sc.leerSucursal();
+            bancos = bc.leerBanco();
+            cargarTablaBancos();
+            cargarTablaClientes();
+            cargarTablaSucursal();
+            cargarTablaPrestamos();
+
+        } catch (IOException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_formWindowActivated
 
     private void jTextField_direccion_bancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_direccion_bancoActionPerformed
@@ -1222,11 +1187,11 @@ SucursalControlador sc = new SucursalControlador();
     }//GEN-LAST:event_jTextField_direccion_bancoActionPerformed
 
     private void jTextField_direccion_bancoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_direccion_bancoKeyPressed
-  
+
     }//GEN-LAST:event_jTextField_direccion_bancoKeyPressed
 
     private void jTextField_direccion_bancoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_direccion_bancoFocusLost
-       
+
     }//GEN-LAST:event_jTextField_direccion_bancoFocusLost
 
     private void jTextField_direccion_bancoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_direccion_bancoMouseExited
@@ -1234,276 +1199,310 @@ SucursalControlador sc = new SucursalControlador();
     }//GEN-LAST:event_jTextField_direccion_bancoMouseExited
 
     /**
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
-    private void jTable_BancoMouseClicked(java.awt.event.MouseEvent evt){
+    private void jTable_BancoMouseClicked(java.awt.event.MouseEvent evt) {
         int fila = 0;
         fila = jTable_Banco.getSelectedRow();
-        String direccion = (String) jTable_Banco.getValueAt(fila,0);
-        String registros = (String) jTable_Banco.getValueAt(fila,1);
-        String jefe_Banco = (String) jTable_Banco.getValueAt(fila,2);
+        String direccion = (String) jTable_Banco.getValueAt(fila, 0);
+        String registros = (String) jTable_Banco.getValueAt(fila, 1);
+        String jefe_Banco = (String) jTable_Banco.getValueAt(fila, 2);
         String nombreBanco = (String) jTable_Banco.getValueAt(fila, 3);
         jTextField_direccion_banco.setText(direccion);
         jTextField_registros.setText(registros);
         jTextField_jefeBanco.setText(jefe_Banco);
         jTextField_Nombre_Banco.setText(nombreBanco);
-    
+
     }
-    
-    private void jTable_clienteMouseClicked(java.awt.event.MouseEvent evt){
+
+    private void jTable_clienteMouseClicked(java.awt.event.MouseEvent evt) {
         int fila = 0;
         fila = jTable_cliente.getSelectedRow();
-        String dni = (String) jTable_cliente.getValueAt(fila,0);
-        String nombre = (String) jTable_cliente.getValueAt(fila,1);
-        String apellido = (String) jTable_cliente.getValueAt(fila,2);
+        String dni = (String) jTable_cliente.getValueAt(fila, 0);
+        String nombre = (String) jTable_cliente.getValueAt(fila, 1);
+        String apellido = (String) jTable_cliente.getValueAt(fila, 2);
         String sucursal = (String) jTable_cliente.getValueAt(fila, 3);
         jTextField_Cliente_Dni.setText(dni);
         jTextField_Nombre_Cliente.setText(nombre);
         jTextField_cliente_apellido.setText(apellido);
         jComboBox_Cliente_to_Sucursal.setSelectedItem(sucursal);
     }
-    
-    private void jTable_prestamoMouseClicked(java.awt.event.MouseEvent evt){
+
+    private void jTable_prestamoMouseClicked(java.awt.event.MouseEvent evt) {
         int fila = 0;
         fila = jTable_prestamo.getSelectedRow();
-        String fechaPrestamo = (String) jTable_prestamo.getValueAt(fila,0);
-        String dineroPrestado = (String) jTable_prestamo.getValueAt(fila,1);
-        String intereses = (String) jTable_prestamo.getValueAt(fila,2);
+        String fechaPrestamo = (String) jTable_prestamo.getValueAt(fila, 0);
+        String dineroPrestado = (String) jTable_prestamo.getValueAt(fila, 1);
+        String intereses = (String) jTable_prestamo.getValueAt(fila, 2);
         String cliente = (String) jTable_prestamo.getValueAt(fila, 3);
         jTextField_prestamo_fecha_prestamo.setText(fechaPrestamo);
         jTextField_prestamo_dinero.setText(dineroPrestado);
         jTextField_prestamo_intereses.setText(intereses);
         jComboBox_prestamo_to_cliente.setSelectedItem(cliente);
     }
-    
-    private void jTable_SucursalMouseClicked(java.awt.event.MouseEvent evt){
-    
+
+    private void jTable_SucursalMouseClicked(java.awt.event.MouseEvent evt) {
+
         int fila = 0;
         fila = jTable_Sucursal.getSelectedRow();
-        String direccionSucursal = (String) jTable_Sucursal.getValueAt(fila,0);
-        String empresa = (String) jTable_Sucursal.getValueAt(fila,1);
-        String jefeSucursal = (String) jTable_Sucursal.getValueAt(fila,2);
+        String direccionSucursal = (String) jTable_Sucursal.getValueAt(fila, 0);
+        String empresa = (String) jTable_Sucursal.getValueAt(fila, 1);
+        String jefeSucursal = (String) jTable_Sucursal.getValueAt(fila, 2);
         String banco = (String) jTable_Sucursal.getValueAt(fila, 3);
         jTextField_Direccion_Sucursal.setText(direccionSucursal);
         jTextField_Empresa_Sucursal.setText(empresa);
         jTextField_Jefe_Sucursal.setText(jefeSucursal);
         jComboBox_Sucursal_to_Banco.setSelectedItem(banco);
     }
-    
-    
-    
+
     /**
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
-    private void jButton_guardar_bancoActionPerformed(java.awt.event.ActionEvent evt){
-        if (!jTextField_jefeBanco.getText().equals("") || !jTextField_registros.getText().equals("") || !jTextField_direccion_banco.getText().equals("") ) {
-            
-        
-    Banco b;
-    String direccion = jTextField_direccion_banco.getText();
-    String registros = jTextField_registros.getText();
-    String jefeBanco = jTextField_jefeBanco.getText();
-    String nombreBanco = jTextField_Nombre_Banco.getText();
-    Banco.setContador(bancos.size());
-    b = new Banco(direccion,registros ,jefeBanco ,nombreBanco );
-    bancos.add(b);
-    
-    try {
-        bc.EscribirBanco(bancos);
-    } catch (IOException ex) {
-        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    
-    }
-        else{
-            JOptionPane.showMessageDialog(null,"Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+    private void jButton_guardar_bancoActionPerformed(java.awt.event.ActionEvent evt) {
+        if (!jTextField_jefeBanco.getText().equals("") || !jTextField_registros.getText().equals("") || !jTextField_direccion_banco.getText().equals("")) {
+
+            Banco b;
+            String direccion = jTextField_direccion_banco.getText();
+            String registros = jTextField_registros.getText();
+            String jefeBanco = jTextField_jefeBanco.getText();
+            String nombreBanco = jTextField_Nombre_Banco.getText();
+            Banco.setContador(bancos.size());
+            b = new Banco(direccion, registros, jefeBanco, nombreBanco);
+            bancos.add(b);
+
+            try {
+                bc.EscribirBanco(bancos);
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    private void jButton_cancelar_bancoActionPerformed(java.awt.event.ActionEvent evt){
+
+    private void jButton_cancelar_bancoActionPerformed(java.awt.event.ActionEvent evt) {
         limpiarTextoBanco();
     }
-    
-    
-    private void jButton_aniadir_bancoActionPerformed(java.awt.event.ActionEvent evt){
-     if (!jTextField_jefeBanco.getText().equals("") || !jTextField_registros.getText().equals("") || !jTextField_direccion_banco.getText().equals("") || !jTextField_Nombre_Banco.getText().equals("") ) {
-    añadirATablaBanco();
-    limpiarTextoBanco();
-     }
-     else{
-        JOptionPane.showMessageDialog(null,"Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
-     }
+
+    private void jButton_aniadir_bancoActionPerformed(java.awt.event.ActionEvent evt) {
+        if (!jTextField_jefeBanco.getText().equals("") || !jTextField_registros.getText().equals("") || !jTextField_direccion_banco.getText().equals("") || !jTextField_Nombre_Banco.getText().equals("")) {
+            añadirATablaBanco();
+            limpiarTextoBanco();
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
     }
-    
-    
-    
+
     /**
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
-    private void  jButton_modificar_bancoActionPerformed(java.awt.event.ActionEvent evt) {
-        if (!jTextField_jefeBanco.getText().equals("") || !jTextField_registros.getText().equals("") || !jTextField_direccion_banco.getText().equals("") ) {
-        int id = getIDDesdeTablaBanco();
-        Banco b;
-    try {
-    
-      
-        Iterator it;
-        it = bancos.iterator();
-        while(it.hasNext()){
-            b = (Banco) it.next();
-            if (b.getnBanco() == id) {
-                b.setJefeBanco(jTextField_jefeBanco.getText());
-                b.setRegistros(jTextField_registros.getText());
-                b.setDireccion(jTextField_direccion_banco.getText());
-                b.setNombreBanco(jTextField_Nombre_Banco.getText());
+    private void jButton_modificar_bancoActionPerformed(java.awt.event.ActionEvent evt) {
+        if (!jTextField_jefeBanco.getText().equals("") || !jTextField_registros.getText().equals("") || !jTextField_direccion_banco.getText().equals("")) {
+            int id = getIDDesdeTablaBanco();
+            Banco b;
+            try {
+
+                Iterator it;
+                it = bancos.iterator();
+                while (it.hasNext()) {
+                    b = (Banco) it.next();
+                    if (b.getnBanco() == id) {
+                        b.setJefeBanco(jTextField_jefeBanco.getText());
+                        b.setRegistros(jTextField_registros.getText());
+                        b.setDireccion(jTextField_direccion_banco.getText());
+                        b.setNombreBanco(jTextField_Nombre_Banco.getText());
+                    }
+                }
+
+                bc.EscribirBanco(bancos);
+                cargarTablaBancos();
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchElementException nsee) {
+                System.out.println("no existe ese elemento");
             }
-           }
-        
-        
-        bc.EscribirBanco(bancos);
-        cargarTablaBancos();
-       } catch (IOException ex) {
-        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        catch(NoSuchElementException nsee){
-            System.out.println("no existe ese elemento");
-        }
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    
-    
+
     /**
-     * 
+     *
      * @param evt
      * @throws IOException
      * @throws FileNotFoundException
-     * @throws ClassNotFoundException 
+     * @throws ClassNotFoundException
      */
-    private void jButton_borrar_bancoActionPerformed(java.awt.event.ActionEvent evt){
-      int id = getIDDesdeTablaBanco();
-       Banco b;
-       int fila;
+    private void jButton_borrar_bancoActionPerformed(java.awt.event.ActionEvent evt) {
+        int id = getIDDesdeTablaBanco();
+        Banco b;
+        int fila;
         try {
-    
-      
-        Iterator it;
-        it = bancos.iterator();
-        while(it.hasNext()){
-            b = (Banco) it.next();
-            if (b.getnBanco() == id) {
-                b.setActivo(false);
-                fila = jTable_Banco.getSelectedRow();
-                DefaultTableModel modelo = (DefaultTableModel) jTable_Banco.getModel();
-                modelo.removeRow(fila);
-                jTable_Banco.setModel(modelo);
+
+            Iterator it;
+            it = bancos.iterator();
+            while (it.hasNext()) {
+                b = (Banco) it.next();
+                if (b.getnBanco() == id) {
+                    b.setActivo(false);
+                    fila = jTable_Banco.getSelectedRow();
+                    DefaultTableModel modelo = (DefaultTableModel) jTable_Banco.getModel();
+                    modelo.removeRow(fila);
+                    jTable_Banco.setModel(modelo);
+                }
             }
-           }
-        
-        
-        bc.EscribirBanco(bancos);
-        cargarTablaBancos();
-       } catch (IOException ex) {
-        Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        catch(NoSuchElementException nsee){
+
+            bc.EscribirBanco(bancos);
+            cargarTablaBancos();
+        } catch (IOException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchElementException nsee) {
             System.out.println("no existe ese elemento");
         }
     }
-    
-    
-    
-    
-    private void jButton_aniadir_sucursalActionPerformed(java.awt.event.ActionEvent evt){
+
+    private void jButton_aniadir_sucursalActionPerformed(java.awt.event.ActionEvent evt) {
         if (!jTextField_Jefe_Sucursal.getText().equals("") || !jTextField_Empresa_Sucursal.getText().equals("") || !jTextField_Direccion_Sucursal.getText().equals("")) {
-    añadirATablaSucursal();
-    limpiarTextoSucursal();
-     }
-     else{
-        JOptionPane.showMessageDialog(null,"Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
-     }
-    
-    
-    
+            añadirATablaSucursal();
+            limpiarTextoSucursal();
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
-    
-    private void jButton_modificar_sucursalActionPerformed(java.awt.event.ActionEvent evt){}
-    
-    private void jButton_borrar_sucursalActionPerformed(java.awt.event.ActionEvent evt){}
-    
-    private void jButton_guardar_sucursalActionPerformed(java.awt.event.ActionEvent evt){}
-    
-    private void jButton_cancelar_sucursalActionPerformed(java.awt.event.ActionEvent evt){
-    limpiarTextoSucursal();
+
+    private void jButton_modificar_sucursalActionPerformed(java.awt.event.ActionEvent evt) {
     }
-    
-    private void jTextField_Cliente_DniActionPerformed(java.awt.event.ActionEvent evt){}
-    
-    private void jButton_guardar_clienteActionPerformed(java.awt.event.ActionEvent evt){}
-    
-    private void jButton_cancelar_clienteActionPerformed(java.awt.event.ActionEvent evt){
-    limpiarTextoCliente();
+
+    private void jButton_borrar_sucursalActionPerformed(java.awt.event.ActionEvent evt) {
     }
-    
-    private void jButton_borrar_clienteActionPerformed(java.awt.event.ActionEvent evt){}
-    
-    private void jButton_modificar_clienteActionPerformed(java.awt.event.ActionEvent evt){}   
-    
-    private void jButton_aniadir_clienteActionPerformed(java.awt.event.ActionEvent evt){
+
+    private void jButton_guardar_sucursalActionPerformed(java.awt.event.ActionEvent evt) { //direccion empresa jefe, banco
+         if (!jTextField_Jefe_Sucursal.getText().equals("") || !jTextField_Empresa_Sucursal.getText().equals("") || !jTextField_Direccion_Sucursal.getText().equals("")) {
+
+            Sucursal b;
+            String direccion = jTextField_Direccion_Sucursal.getText();
+            String empresa = jTextField_Empresa_Sucursal.getText();
+            String jefeSucursal = jTextField_Jefe_Sucursal.getText();
+            int idBanco = getIdPorNombreBanco(jComboBox_Sucursal_to_Banco.getSelectedItem().toString());
+            Sucursal.setContador(sucursales.size());
+            b = new Sucursal(direccion, empresa, jefeSucursal, idBanco);
+            sucursales.add(b);
+
+            try {
+                sc.EscribirSucursal(sucursales);
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private void jButton_cancelar_sucursalActionPerformed(java.awt.event.ActionEvent evt) {
+        limpiarTextoSucursal();
+    }
+
+    private void jTextField_Cliente_DniActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jButton_guardar_clienteActionPerformed(java.awt.event.ActionEvent evt) { //DNI NOMBRE  APELLIDO SUCURSAL
         if (!jTextField_Cliente_Dni.getText().equals("") || !jTextField_Nombre_Cliente.getText().equals("") || !jTextField_cliente_apellido.getText().equals("")) {
-    añadirATablaCliente();
-    limpiarTextoSucursal();
-     }
-     else{
-        JOptionPane.showMessageDialog(null,"Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
-     }
-    
-    
-    
+
+            Cliente b;
+            String dni = jTextField_Cliente_Dni.getText();
+            String nombre = jTextField_Nombre_Cliente.getText();
+            String apellido = jTextField_cliente_apellido.getText();
+            int idSucursal = getIdPorNombreBanco(jComboBox_Cliente_to_Sucursal.getSelectedItem().toString());
+            Cliente.setContador(sucursales.size());
+            b = new Cliente(dni, nombre, apellido, idSucursal);
+            clientes.add(b);
+
+            try {
+                cc.EscribirCliente(clientes);
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }
-    
-    private void jButton_guardar_prestamoActionPerformed(java.awt.event.ActionEvent evt){}
-    
-    private void jButton_cancelar_prestamoActionPerformed(java.awt.event.ActionEvent evt){
-    limpiarTextoPrestamo();
+
+    private void jButton_cancelar_clienteActionPerformed(java.awt.event.ActionEvent evt) {
+        limpiarTextoCliente();
     }
-    
-    private void jButton_borrar_prestamoActionPerformed(java.awt.event.ActionEvent evt){}
-    
-    private void jButton_modificar_prestamoActionPerformed(java.awt.event.ActionEvent evt){}
-    
-    private void jButton_aniadir_prestamoActionPerformed(java.awt.event.ActionEvent evt){
-    if (!jTextField_prestamo_dinero.getText().equals("") || !jTextField_prestamo_intereses.getText().equals("") || !jTextField_prestamo_intereses.getText().equals("")) {
-    añadirATablaCliente();
-    limpiarTextoSucursal();
-     }
-     else{
-        JOptionPane.showMessageDialog(null,"Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
-     }
-    
+
+    private void jButton_borrar_clienteActionPerformed(java.awt.event.ActionEvent evt) {
     }
-    
-    private void jTextField_prestamo_fecha_prestamoActionPerformed(java.awt.event.ActionEvent evt){}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    private void jButton_modificar_clienteActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jButton_aniadir_clienteActionPerformed(java.awt.event.ActionEvent evt) {
+        if (!jTextField_Cliente_Dni.getText().equals("") || !jTextField_Nombre_Cliente.getText().equals("") || !jTextField_cliente_apellido.getText().equals("")) {
+            añadirATablaCliente();
+            limpiarTextoSucursal();
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private void jButton_guardar_prestamoActionPerformed(java.awt.event.ActionEvent evt) { // fecha dinero intereses cliente
+                if (!jTextField_Cliente_Dni.getText().equals("") || !jTextField_Nombre_Cliente.getText().equals("") || !jTextField_cliente_apellido.getText().equals("")) {
+
+            Prestamo b;
+            String fecha = jTextField_prestamo_fecha_prestamo.getText();
+            int dinero = Integer.valueOf(jTextField_prestamo_dinero.getText());
+            int intereses = Integer.valueOf(jTextField_prestamo_intereses.getText());
+            int idCliente = getIdPorNombreBanco(jComboBox_prestamo_to_cliente.getSelectedItem().toString());
+            Cliente.setContador(clientes.size());
+            b = new Prestamo(fecha, dinero, intereses, idCliente);
+            prestamos.add(b);
+
+            try {
+                pc.EscribirPrestamo(prestamos);
+            } catch (IOException ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
+
+    private void jButton_cancelar_prestamoActionPerformed(java.awt.event.ActionEvent evt) {
+        limpiarTextoPrestamo();
+    }
+
+    private void jButton_borrar_prestamoActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jButton_modificar_prestamoActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jButton_aniadir_prestamoActionPerformed(java.awt.event.ActionEvent evt) {
+        if (!jTextField_prestamo_dinero.getText().equals("") || !jTextField_prestamo_intereses.getText().equals("") || !jTextField_prestamo_intereses.getText().equals("")) {
+            añadirATablaCliente();
+            limpiarTextoSucursal();
+        } else {
+            JOptionPane.showMessageDialog(null, "Hay un campo o varios campos vacios", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    private void jTextField_prestamo_fecha_prestamoActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_aniadir_banco;
