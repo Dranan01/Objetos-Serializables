@@ -87,13 +87,12 @@ public class Cliente implements Serializable{
         this.nombre = nombre;
     }
     
-    
-    
-
-  
-
-    public boolean isActivo() {
+     public boolean isActivo() {
         return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
     
     

@@ -91,6 +91,11 @@ public class Prestamo implements Serializable{
     public boolean isActivo() {
         return activo;
     }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
     
     
     

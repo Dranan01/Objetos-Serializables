@@ -110,7 +110,7 @@ public class NewJFrame extends javax.swing.JFrame {
                 jTable_Banco.setModel(new javax.swing.table.DefaultTableModel(
                         matriz,
                         new String[]{
-                            "Direccion", "Registros", "Jefe Banco", "Nombre Banco"
+                            "Direccion", "Jefe Banco", "Registros", "Nombre Banco"
                         }
                 ));
 
@@ -708,16 +708,22 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel_bancoLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jPanel_bancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_telefono)
-                            .addComponent(jLabel_direccion)
-                            .addComponent(jLabel_direccion1)
-                            .addComponent(jLabel4))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel_bancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_registros)
-                            .addComponent(jTextField_jefeBanco)
-                            .addComponent(jTextField_direccion_banco)
-                            .addComponent(jTextField_Nombre_Banco))
+                            .addGroup(jPanel_bancoLayout.createSequentialGroup()
+                                .addComponent(jLabel_direccion1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField_registros, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel_bancoLayout.createSequentialGroup()
+                                .addGroup(jPanel_bancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel_telefono)
+                                    .addComponent(jLabel4))
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel_bancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField_direccion_banco)
+                                    .addComponent(jTextField_Nombre_Banco)))
+                            .addGroup(jPanel_bancoLayout.createSequentialGroup()
+                                .addComponent(jLabel_direccion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextField_jefeBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel_bancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_guardar_banco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -744,20 +750,20 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel_telefono)
                     .addComponent(jTextField_direccion_banco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_guardar_banco))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel_bancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_registros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_direccion1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel_bancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_direccion)
+                    .addComponent(jTextField_jefeBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel_bancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_jefeBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_direccion))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel_direccion1)
+                    .addComponent(jTextField_registros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel_bancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField_Nombre_Banco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_cancelar_banco))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         jTabbedPane.addTab("Banco", jPanel_banco);
@@ -1411,17 +1417,30 @@ public class NewJFrame extends javax.swing.JFrame {
      * @throws FileNotFoundException
      * @throws ClassNotFoundException
      */
-    private void jButton_borrar_bancoActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jButton_borrar_bancoActionPerformed(java.awt.event.ActionEvent evt) { //no puede borrar bancos que tengan sucursales
         int id = getIDDesdeTablaBanco();
+        int contador = 0;
         Banco b;
+        Sucursal s;
         int fila;
+        
+        Iterator<Sucursal> it2;
+            it2 = sucursales.iterator();
+            while(it2.hasNext()){
+                s = it2.next();
+                if (id == s.getnBanco() && s.isActivo() == true ) {
+                    contador++;
+                }
+            }
         try {
-
-            Iterator it;
+            
+            it2 = sucursales.iterator();
+            if (contador == 0) {
+                    Iterator it;
             it = bancos.iterator();
             while (it.hasNext()) {
                 b = (Banco) it.next();
-                if (b.getnBanco() == id) {
+                 if (b.getnBanco() == id) {
                     b.setActivo(false);
                     fila = jTable_Banco.getSelectedRow();
                     DefaultTableModel modelo = (DefaultTableModel) jTable_Banco.getModel();
@@ -1432,12 +1451,18 @@ public class NewJFrame extends javax.swing.JFrame {
 
             bc.EscribirBanco(bancos);
             cargarTablaBancos();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Borra primero las sucursales dependientes ", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+                }
+            
+        
+        
         } catch (IOException ex) {
             Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchElementException nsee) {
             System.out.println("no existe ese elemento");
-        }
-    }
+        }    }
 
     private void jButton_aniadir_sucursalActionPerformed(java.awt.event.ActionEvent evt) {
         if (!jTextField_Jefe_Sucursal.getText().equals("") || !jTextField_Empresa_Sucursal.getText().equals("") || !jTextField_Direccion_Sucursal.getText().equals("")) {
@@ -1482,6 +1507,51 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void jButton_borrar_sucursalActionPerformed(java.awt.event.ActionEvent evt) {
+        int id = getIDDesdeTablaSucursal();
+        int contador = 0;
+        Sucursal b;
+        Cliente s;
+        int fila;
+        
+        Iterator<Cliente> it2;
+            it2 = clientes.iterator();
+            while(it2.hasNext()){
+                s = it2.next();
+                if (id == s.getnSucursal() && s.isActivo() == true) {
+                    contador++;
+                }
+            }
+        try {
+            
+            if (contador == 0) {
+                    Iterator it;
+            it = sucursales.iterator();
+            while (it.hasNext()) {
+                b = (Sucursal) it.next();
+                 if (b.getnSucursal() == id) {
+                    b.setActivo(false);
+                    fila = jTable_Sucursal.getSelectedRow();
+                    DefaultTableModel modelo = (DefaultTableModel) jTable_Sucursal.getModel();
+                    modelo.removeRow(fila);
+                    jTable_Sucursal.setModel(modelo);
+                }
+            }
+
+            sc.EscribirSucursal(sucursales);
+            cargarTablaSucursal();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Borra primero los clientes de la sucursal ", " Mensaje de error", JOptionPane.ERROR_MESSAGE);
+                }
+            
+        
+        
+        } catch (IOException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchElementException nsee) {
+            System.out.println("no existe ese elemento");
+        }    
+        
     }
 
     private void jButton_guardar_sucursalActionPerformed(java.awt.event.ActionEvent evt) { //direccion empresa jefe, banco
@@ -1544,6 +1614,51 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void jButton_borrar_clienteActionPerformed(java.awt.event.ActionEvent evt) {
+        int id = getIDDesdeTablaCliente();
+        int contador = 0;
+        Cliente b;
+        Prestamo s;
+        int fila;
+        
+        Iterator<Prestamo> it2;
+            it2 = prestamos.iterator();
+            while(it2.hasNext()){
+                s = it2.next();
+                if (id == s.getnCliente() && s.isActivo() == true) {
+                    contador++;
+                }
+            }
+        try {
+            
+            if (contador == 0) {
+                    Iterator it;
+            it = clientes.iterator();
+            while (it.hasNext()) {
+                b = (Cliente) it.next();
+                 if (b.getnCliente()== id) {
+                    b.setActivo(false);
+                    fila = jTable_cliente.getSelectedRow();
+                    DefaultTableModel modelo = (DefaultTableModel) jTable_cliente.getModel();
+                    modelo.removeRow(fila);
+                    jTable_cliente.setModel(modelo);
+                }
+            }
+
+            cc.EscribirCliente(clientes);
+            cargarTablaClientes();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Borra primero los prestamos de los clientes ", "Mensaje de error", JOptionPane.ERROR_MESSAGE);
+                }
+            
+        
+        
+        } catch (IOException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchElementException nsee) {
+            System.out.println("no existe ese elemento");
+        }
+        
     }
 
     private void jButton_modificar_clienteActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1615,6 +1730,35 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void jButton_borrar_prestamoActionPerformed(java.awt.event.ActionEvent evt) {
+        
+        try {
+            int fila;
+            int id = getIDDesdeTablaPrestamo();
+            Prestamo b;
+            Iterator it;
+            it = prestamos.iterator();
+            while (it.hasNext()) {
+                b = (Prestamo) it.next();
+                 if (b.getnPrestamo() == id) {
+                    b.setActivo(false);
+                    fila = jTable_prestamo.getSelectedRow();
+                    DefaultTableModel modelo = (DefaultTableModel) jTable_prestamo.getModel();
+                    modelo.removeRow(fila);
+                    jTable_prestamo.setModel(modelo);
+                }
+            }
+
+            pc.EscribirPrestamo(prestamos);
+            cargarTablaPrestamos();
+                }
+          catch (IOException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchElementException nsee) {
+            System.out.println("no existe ese elemento");
+        }    
+        
+        
+        
     }
 
     private void jButton_modificar_prestamoActionPerformed(java.awt.event.ActionEvent evt) {

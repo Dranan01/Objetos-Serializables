@@ -71,6 +71,12 @@ public class Sucursal implements Serializable {
         return activo;
     }
 
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+    
+    
+
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
